@@ -1,0 +1,54 @@
+create database academia;
+
+
+use academia;
+
+
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `cpf` varchar(60) NOT NULL,
+  `nome` varchar(200) NOT NULL,
+  `sobrenome` varchar(200) NOT NULL,
+  `idade` int(3) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  `sexo` varchar(100) NOT NULL,
+  `endereco` varchar(200) NOT NULL,
+  `n` int(5) NOT NULL,
+  `complemento` varchar(100),
+  `bairro` varchar(100) NOT NULL,
+  `cidade` varchar(100) NOT NULL,
+  `uf` varchar(5) NOT NULL,
+  `Altura` float NOT NULL,
+  `Peso` float NOT NULL,
+  PRIMARY KEY (`cpf`)
+); 
+
+
+CREATE TABLE IF NOT EXISTS `mensalidades` (
+  `cpf` varchar(60) NOT NULL,
+  `valor` float(10,2) DEFAULT NULL,
+  `janeiro` varchar(100) DEFAULT 'Aberto',
+  `fevereiro` varchar(100) DEFAULT 'Aberto',
+  `marco` varchar(100) DEFAULT 'Aberto',
+  `abril` varchar(100) DEFAULT 'Aberto',
+  `maio` varchar(100) DEFAULT 'Aberto',
+  `junho` varchar(100) DEFAULT 'Aberto',
+  `julho` varchar(100) DEFAULT 'Aberto',
+  `agosto` varchar(100) DEFAULT 'Aberto',
+  `setembro` varchar(100) DEFAULT 'Aberto',
+  `outubro` varchar(100) DEFAULT 'Aberto',
+  `novembro` varchar(100) DEFAULT 'Aberto',
+  `dezembro` varchar(100) DEFAULT 'Aberto',
+  PRIMARY KEY (`cpf`),
+  KEY `pfk` (`cpf`)
+);
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `user` varchar(200) NOT NULL,
+  `pass` varchar(6) NOT NULL
+); 
+
+INSERT INTO `users` (`user`, `pass`) VALUES
+('admin', '123456');
+
+ALTER TABLE `mensalidades`
+  ADD CONSTRAINT `pfcks` FOREIGN KEY (`cpf`) REFERENCES `cliente` (`cpf`) ON DELETE CASCADE ON UPDATE CASCADE;
